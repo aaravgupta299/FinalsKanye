@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //i dont even need to explain ts
+final Uri _url = Uri.parse('https://kanye.rest');
+
+Future<void> _launchUrl() async {
+  if (!await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
+  }
+}
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -38,7 +45,10 @@ class AboutPage extends StatelessWidget {
               style: textStyle,
             ),
             const SizedBox(height: 24),
-            Text('API', style: headingStyle),
+            ElevatedButton(
+              onPressed: _launchUrl,
+              child: Text('API'),
+            ),
             const SizedBox(height: 16),
             Text('Powered by the kanye.rest API', style: textStyle),
             const SizedBox(height: 24),
